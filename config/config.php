@@ -2,7 +2,7 @@
 
   $config = array(
     "urls" => array(
-      "baseUrl" => "/~ssimola/be/tehtavat/marjis"
+        "baseUrl" => "/~ssimola/be/tehtavat/marjis"
     )
   );
 
