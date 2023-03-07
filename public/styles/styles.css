@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: 'Rubik', sans-serif;
+    background-image: url("../images/marjis_syksy.jpeg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+
+
+  }
+
+  body {
+    background: rgba(255,255,255,0.7);;
+    min-height: 100vh;
+    max-width: 40rem;
+    margin: 0 auto;
+    box-shadow: 0px 0px 25px rgba(0,0,0,0.6);
+    
+  }
+
+  header {
+    background-color: white;
+  }
+
+header h1 img {
+    width: 100px;
+}
+
+  header a {
+    color: #000;
+    text-decoration: none;
+  }
+
+  section {
+    padding: 1.5rem 1rem 1rem 1rem;
+  }
+
+  section h1 {
+    margin-bottom: 1rem;
+  }
+
+  hr {
+    border: none;
+    border-top: solid #1B1B3A 2px;
+    margin: 1rem;
+  }
+
+  footer {
+    font-size: 0.8rem;
+    text-align: center;
+    color: #1B1B3A;
+  }
+
+  .tapahtumat > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  
+  .tapahtumat > div > div:nth-child(3) {
+    text-align: right;
+  }
+    
+  
+  
+  
