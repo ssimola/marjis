@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@1,400;1,600&family=Open+Sans:wght@400;700&display=swap');
 
 * {
     padding: 0;
@@ -67,6 +67,32 @@ header h1 img {
   .tapahtumat > div > div:nth-child(3) {
     text-align: right;
   }
+
+  form > div {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.5rem;
+  }
+
+  input {
+    border: 1px solid #7ab317;
+    border-radius: 0.3rem;
+    padding: 0.45rem;
+    font-size: 1rem;
+  }
+
+  input[type=submit] {
+    padding: 0.5rem 3rem;
+    border-radius: 0.3rem;
+    background-color: #7ab317;
+    color: #fff;
+    font-weight: bold;
+    min-width: 12rem;
+    margin: 1rem auto;
+  }
+  
+  
+  
     
   
   

@@ -13,7 +13,7 @@
   </div>
   <div>
     <label for="mökki">Mökin numero:</label>
-    <input id="mökki" type="text" name="mökki">
+    <input id="mökki" type="number" name="mökki">
   </div>
   <div>
     <label for="salasana1">Salasana:</label>
