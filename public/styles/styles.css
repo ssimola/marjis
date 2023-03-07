@@ -8,30 +8,34 @@
 
   html {
     font-family: 'Rubik', sans-serif;
-    background-image: url("../images/marjis_syksy.jpeg");
+    background-image: url("../images/omenapuu.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
-
+    padding: 0.7em;
+    
 
   }
 
   body {
-    background: rgba(255,255,255,0.7);;
+    background: rgba(255,255,255,0.8);
     min-height: 100vh;
-    max-width: 40rem;
-    margin: 0 auto;
+    max-width: 35rem;
+    margin: 0 auto ;
     box-shadow: 0px 0px 25px rgba(0,0,0,0.6);
-    
+    border-radius: 0.5rem 0.5rem ;
+
   }
 
   header {
-    background-color: white;
+    background-color: rgb(255, 255, 255,0.6);
+    border-radius: 0.5rem 0.5rem 0rem 0rem;
   }
 
 header h1 img {
     width: 100px;
+    margin: 0.1em;
 }
 
   header a {
