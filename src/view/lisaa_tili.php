@@ -12,8 +12,8 @@
     <input id="email" type="email" name="email">
   </div>
   <div>
-    <label for="mökki">Mökin numero:</label>
-    <input id="mökki" type="number" name="mökki">
+    <label for="mokki">Mökin numero:</label>
+    <input id="mokki" type="number" name="mokki">
   </div>
   <div>
     <label for="salasana1">Salasana:</label>
