@@ -60,7 +60,12 @@
           echo $templates->render('kirjaudu', [ 'error' => []]);
         }
         break;
-    default:
-      echo $templates->render('notfound');
+        case "/logout":
+          require_once CONTROLLER_DIR . 'kirjaudu.php';
+          logout();
+          header("Location: " . $config['urls']['baseUrl']);
+          break;
+        default:
+        echo $templates->render('notfound');
   }
 ?> 
