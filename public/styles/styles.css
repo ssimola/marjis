@@ -31,6 +31,12 @@
   header {
     background-color: rgba(255, 255, 255,0.7);
     border-radius: 0.5rem 0.5rem 0rem 0rem;
+    padding: 0rem 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
   }
 
 header h1 img {
@@ -112,6 +118,9 @@ header h1 img {
 .info a {
   color:  #7ab317;
 }
+
+
+
   
   
   
