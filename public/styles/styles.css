@@ -29,7 +29,7 @@
   }
 
   header {
-    background-color: rgb(255, 255, 255,0.6);
+    background-color: rgba(255, 255, 255,0.7);
     border-radius: 0.5rem 0.5rem 0rem 0rem;
   }
 
@@ -96,9 +96,22 @@ header h1 img {
   }
 
   .error {
-    color: red;
-    font-size: 0.8rem;
-  }
+  color: red;
+  font-size: 0.8rem;
+}
+
+.info {
+  background-color: #e5e5e5;
+  border: 1px solid  #7ab317;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin: 1rem;
+  text-align: center;
+}
+
+.info a {
+  color:  #7ab317;
+}
   
   
   
