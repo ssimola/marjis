@@ -4,6 +4,14 @@
 
   // Suoritetaan projektin alustusskripti.
   require_once '../src/init.php';
+
+   // Haetaan kirjautuneen käyttäjän tiedot.
+   if (isset($_SESSION['user'])) {
+    require_once MODEL_DIR . 'henkilo.php';
+    $loggeduser = haeHenkilo($_SESSION['user']);
+  } else {
+    $loggeduser = NULL;
+  }
   // Siistitään polku urlin alusta ja mahdolliset parametrit urlin lopusta.
   // Siistimisen jälkeen osoite /~ssimola/be/tehtavat/marjis/tapahtuma?id=1 on 
   // lyhentynyt muotoon /tapahtuma.
