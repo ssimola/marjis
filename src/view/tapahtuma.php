@@ -4,7 +4,7 @@
   $end = new DateTime($tapahtuma['tap_loppuu']);
 ?>
 <h1><?=$tapahtuma['nimi']?></h1>
-<div><?=$tapahtuma['kuvaus']?></div>
+<div><b><?=$tapahtuma['kuvaus']?></b></div><br>
 <div>Alkaa: <?=$start->format('j.n.Y G:i')?></div>
 <div>Loppuu: <?=$end->format('j.n.Y G:i')?></div>
 
