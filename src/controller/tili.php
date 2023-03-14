@@ -1,7 +1,5 @@
 <?php
-
 function lisaaTili($formdata, $baseurl='') {
-
   // Tuodaan henkilo-mallin funktiot, joilla voidaan lisätä
   // henkilön tiedot tietokantaan.
   require_once(MODEL_DIR . 'henkilo.php');
@@ -21,13 +19,13 @@ function lisaaTili($formdata, $baseurl='') {
       $error['nimi'] = "Syötä nimesi ilman erikoismerkkejä.";
     }
   }
-  // Tarkistetaan, että mökin numero on määritelty ja se on
-  // muodossa 0000.
+  // Tarkistetaan, että discord-tunnus on määritelty ja se on
+  // muodossa tunnus#0000.
   if (!isset($formdata['mokki']) || !$formdata['mokki']) {
-    $error['mokki'] = "Anna Mökin numero muodossa: 0000.";
+    $error['mokki'] = "Anna mökin numero muodossa 0000.";
   } else {
-    if (!preg_match("/^[0-9]*$/",$formdata['mokki'])) {
-      $error['mokki'] = "Mökin numero on virheellinen.";
+    if (!preg_match('/^[0-9]*$/',$formdata['mokki'])) {
+      $error['mokki'] = "Discord-tunnuksesi muoto on virheellinen.";
     }
   }
   // Tarkistetaan, että sähköpostiosoite on määritelty ja se on
@@ -61,7 +59,7 @@ function lisaaTili($formdata, $baseurl='') {
     // Salataan salasana myös samalla.
     $nimi = $formdata['nimi'];
     $email = $formdata['email'];
-    $mokki = $formdata['mokki'];
+    $mokki = $formdata['discord'];
     $salasana = password_hash($formdata['salasana1'], PASSWORD_DEFAULT);
     // Lisätään henkilö tietokantaan. Jos lisäys onnistui,
     // tulee palautusarvona lisätyn henkilön id-tunniste.
@@ -83,13 +81,11 @@ function lisaaTili($formdata, $baseurl='') {
     // onnistui rivin lisääminen. Muuten liäämisessä ilmeni
     // ongelma.
     if ($idhenkilo) {
-
       // Luodaan käyttäjälle aktivointiavain ja muodostetaan
       // aktivointilinkki.
       require_once(HELPERS_DIR . "secret.php");
       $avain = generateActivationCode($email);
       $url = 'https://' . $_SERVER['HTTP_HOST'] . $baseurl . "/vahvista?key=$avain";
-
       // Päivitetään aktivointiavain tietokantaan ja lähetetään
       // käyttäjälle sähköpostia. Jos tämä onnistui, niin palautetaan
       // palautusarvona tieto tilin onnistuneesta luomisesta. Muuten
@@ -122,10 +118,9 @@ function lisaaTili($formdata, $baseurl='') {
     ];
   }
 }
-
 function lahetaVahvavain($email,$url) {
   $message = "Hei!\n\n" . 
-             "Olet rekisteröitynyt Marjis-palveluun tällä\n" . 
+             "Olet rekisteröitynyt Marji-palveluun tällä\n" . 
              "sähköpostiosoitteella. Klikkaamalla alla olevaa\n" . 
              "linkkiä vahvistat käyttämäsi sähköpostiosoitteen\n" .
              "ja pääset käyttämään Marjis-palvelua.\n\n" . 
@@ -134,7 +129,7 @@ function lahetaVahvavain($email,$url) {
              "silloin tämä sähköposti on tullut sinulle\n" .
              "vahingossa. Siinä tapauksessa ole hyvä ja\n" .
              "poista tämä viesti.\n\n".
-             "Terveisin, Lanify-palvelu";
+             "Terveisin, Marjis-palvelu";
   return mail($email,'Marjis-tilin aktivointilinkki',$message);
 }
 
@@ -181,86 +176,5 @@ function luoVaihtoavain($email, $baseurl='') {
   }
 
 }
-function resetoiSalasana($formdata, $resetkey='') {
-
-  // Tuodaan henkilo-mallin funktiot, joilla voidaan vaihtaa salasana.
-  require_once(MODEL_DIR . 'henkilo.php');
-
-  // Alustetaan virhemuuttuja, joka palautetaan lopuksi joko
-  // tyhjänä tai virhetekstillä.
-  $error = "";
-
-  // Seuraavaksi tehdään lomaketietojen tarkistus.
-  // Jos kentän arvo ei täytä tarkistuksen ehtoja, niin error-muuttujaan
-  // lisätään virhekuvaus. Lopussa error-muuttuja on tyhjä, jos
-  // salasanat meni tarkistuksesta lävitse.
-
-  // Tarkistetaan, että kummatkin salasanat on annettu ja että
-  // ne ovat keskenään samat.
-  if (isset($formdata['salasana1']) && $formdata['salasana1'] &&
-      isset($formdata['salasana2']) && $formdata['salasana2']) {
-    if ($formdata['salasana1'] != $formdata['salasana2']) {
-      $error = "Salasanasi eivät olleet samat!";
-    }
-  } else {
-    $error = "Syötä salasanasi kahteen kertaan.";
-  }
-
-  // Vaihdetaan käyttäjälle uusi salasana, jos syötetyt
-  // salasanat olivat samat eli error-muuttujasta ei
-  // löydy virhetekstiä.
-  if (!$error) {
-
-    // Salataan salasana.
-    $salasana = password_hash($formdata['salasana1'], PASSWORD_DEFAULT);
-
-    // Vaihdetaan käyttäjälle uusi salasana vaihtoavaimella.
-    // Palautusarvona tulee päivitettyjen rivien lukumäärä.
-    $rowcount = vaihdaSalasanaAvaimella($salasana,$resetkey);
-
-    // Palautetaan JSON-tyyppinen taulukko, jossa:
-    //  status   = Koodi, joka kertoo päivityksen onnistumisen.
-    //             Hyvin samankaltainen kuin HTTP-protokollan
-    //             vastauskoodi.
-    //             200 = OK
-    //             400 = Bad Request
-    //             500 = Internal Server Error
-    //  error    = Taulukko, jossa on lomaketarkistuksessa
-    //             esille tulleet virheet.
-
-    // Tarkistetaan onnistuiko salasanan vaihtaminen.
-    // Jos rowcount-muuttujassa on positiivinen arvo,
-    // salasanan päivitys onnistui. Muuten päivityksessä ilmeni
-    // ongelma.
-    if ($rowcount) {
-
-      return [
-        "status"   => 200,
-        "resetkey" => $resetkey
-      ];
-
-    } else {
-
-      return [
-        "status"   => 500,
-        "resetkey" => $resetkey
-      ];
-
-    }
-
-  } else {
-
-    // Lomaketietojen tarkistuksessa ilmeni virheitä.
-    return [
-      "status"   => 400,
-      "resetkey" => $resetkey,
-      "error"    => $error
-    ];
-
-  }
-
-}
-
-
 
 ?>
