@@ -83,7 +83,7 @@
         echo $templates->render('lisaa_tili', ['formdata' => [], 'error' => []]);
         break;
       }
-    case "/vahvista":
+    case '/vahvista':
       if (isset($_GET['key'])) {
         $key = $_GET['key'];
         require_once MODEL_DIR . 'henkilo.php';
@@ -96,7 +96,7 @@
         header("Location: " . $config['urls']['baseUrl']);
       }
       break;
-      case "/kirjaudu":
+      case '/kirjaudu':
         if (isset($_POST['laheta'])) {
           require_once CONTROLLER_DIR . 'kirjaudu.php';
           if (tarkistaKirjautuminen($_POST['email'],$_POST['salasana'])) {
@@ -116,11 +116,24 @@
           echo $templates->render('kirjaudu', [ 'error' => []]);
         }
         break;
-    case "/logout":
+    case '/logout':
       require_once CONTROLLER_DIR . 'kirjaudu.php';
       logout();
       header("Location: " . $config['urls']['baseUrl']);
       break;
+      case "/tilaa_vaihtoavain":
+        $formdata = cleanArrayData($_POST);
+        // Tarkistetaan, onko lomakkeelta lähetetty tietoa.
+        if (isset($formdata['laheta'])) {    
+    
+          // TODO vaihtoavaimen tilauskäsittely
+    
+        } else {
+          // Lomakeelta ei ole lähetetty tietoa, tulostetaan lomake.
+          echo $templates->render('tilaa_vaihtoavain_lomake');
+        }
+        break;
+  
     default:
       echo $templates->render('notfound');
   }
