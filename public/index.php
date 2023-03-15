@@ -121,6 +121,15 @@
       logout();
       header("Location: " . $config['urls']['baseUrl']);
       break;
+      case '/yhteystiedot':
+        echo $templates->render('yhteystiedot');
+        break;
+        case '/kartta':
+          echo $templates->render('kartta');
+          break;
+          case '/talkoot':
+            echo $templates->render('talkoot');
+            break;
       case "/tilaa_vaihtoavain":
         $formdata = cleanArrayData($_POST);
         // Tarkistetaan, onko lomakkeelta lähetetty tietoa.

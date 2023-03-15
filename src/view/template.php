@@ -8,7 +8,7 @@
   </head>
   <body>
   <header>
-      <h1><a href="<?=BASEURL?>"><img src="images/logo.jpg"/></a></h1>
+      <h1><a href="<?=BASEURL?>">marjis</a></h1> 
       <div class="profile">
         <?php
           if (isset($_SESSION['user'])) {
@@ -20,6 +20,12 @@
         ?>
       </div>
     </header>
+    <nav>
+    <div>
+         <a href="<?=BASEURL."/talkoot"?>">Talkoot </a>
+         <a href="<?=BASEURL."/kartta"?>">Kartta </a>
+         <a href="<?=BASEURL."/yhteystiedot"?>">Yhteystiedot </a>
+      </nav> 
     <section>
       <?=$this->section('content')?>
     </section>
